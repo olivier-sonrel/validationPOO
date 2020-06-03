@@ -4,8 +4,9 @@ spl_autoload_register(function ($class) {
     require 'classes/' . $class . '.php';
 });
 
+//$player1 = new Mage('Magicien');
 $player1 = new Warrior('Guerrier');
-$player2 = new Archer('Archer');//new Mage('Magicien');
+$player2 = new Archer('Archer');
 
 // Characters attacking while both alive
 while ($player1->isAlive() && $player2->isAlive()) {

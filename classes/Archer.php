@@ -2,32 +2,38 @@
 
 class Archer extends Character {
 
-    private $arrow = 20;
+    private $arrow = 10;
     private $focus = 1;
     
     public function __construct($pseudo) {
         $this->pseudo = $pseudo;
-        $this->atk = 15;
+        $this->atk = 20;
     }
 
     public function action($target) {
+        //s'aplique si focus tour precedent
         if($this->focus == 2){
-            return $this->doubleAttack($target);
-        }elseif($this->focus == 3){
             return $this->focusAttack($target);
+        }elseif($this->focus == 3){
+            return $this->doubleAttack($target);
+        //tour par defaut
         }else{
-            $choice = rand(1, 3);
+            if($this->arrow >= 2){// choice si + 2 fleche
+                $choice = rand(1, 3);
+            }else{// choice si - 2 fleche
+                $choice = rand(1, 2);
+            }
             if($this->arrow <= 0) {
                 return $this->dagger($target);
             } elseif ($choice == 1 ) {
                 return $this->attack($target);
             } elseif ($choice == 2) {
                 $this->focus = 2;
-                $status = "$this->pseudo se concentre pour tirer 2 fleches...";
+                $status = "$this->pseudo se concentre pour tire précis...";
                 return $status;
             } elseif ($choice == 3) {
                 $this->focus = 3;
-                $status = "$this->pseudo se concentre pour un tire précis...";
+                $status = "$this->pseudo se concentre pour un tire double...";
                 return $status;
             }
         }
@@ -76,5 +82,3 @@ class Archer extends Character {
         return;
     }
 }
-
-// vise presise 2tour mais rand 1,5 3* les degat
